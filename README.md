@@ -1,2 +1,2 @@
 # cobbler-snippets
-Helpful snippets for deploying.
+Useful snippets for deploying with cobbler. http://cobbler.github.io/

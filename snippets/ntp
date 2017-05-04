@@ -1,0 +1,48 @@
+exec < /dev/tty3 > /dev/tty3
+chvt 3
+(
+service ntpd stop
+rm -rf /var/lib/ntp/ntp.drift
+touch /etc/ntp.conf
+echo -n "" > /etc/ntp.conf
+cat >> /etc/ntp.conf <<EOF_ntpconf
+## ntp.conf:
+#
+# Enable next tinker options:
+# panic - keep ntpd from panicking in the event of a large clock skew
+# when a VM guest is suspended and resumed;
+# stepout - allow ntpd change offset faster
+tinker panic 0
+
+disable monitor
+
+# Permit time synchronization with our time source, but do not
+# permit the source to query or modify the service on this system.
+restrict default kod nomodify notrap nopeer noquery
+restrict -6 default kod nomodify notrap nopeer noquery
+restrict 127.0.0.1
+restrict -6 ::1
+
+# Set up servers for ntpd with next options:
+# server - IP address or DNS name of upstream NTP server
+# iburst - allow send sync packages faster if upstream unavailable
+# prefer - select preferrable server
+# minpoll - set minimal update frequency
+# maxpoll - set maximal update frequency
+server 0.uk.pool.ntp.org iburst
+server 1.uk.pool.ntp.org iburst
+server 2.uk.pool.ntp.org iburst
+server 3.uk.pool.ntp.org iburst
+
+# Driftfile.
+driftfile /var/lib/ntp/drift
+logfile /var/log/ntp.log
+EOF_ntpconf
+
+ntpdate -u 0.uk.pool.ntp.org 1.uk.pool.ntp.org 2.uk.pool.ntp.org 3.uk.pool.ntp.org
+ntpdate -u 0.uk.pool.ntp.org 1.uk.pool.ntp.org 2.uk.pool.ntp.org 3.uk.pool.ntp.org
+ntpdate -u 0.uk.pool.ntp.org 1.uk.pool.ntp.org 2.uk.pool.ntp.org 3.uk.pool.ntp.org
+service ntpd start
+chkconfig ntpd on
+)
+chvt 1
