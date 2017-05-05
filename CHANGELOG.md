@@ -2,7 +2,7 @@
 ### Summary
 
 #### Features
-- Add dsavell_update, cleans old kernels on boot, installs epel-release https://fedoraproject.org/wiki/EPEL, updates OS, updates mlocate database.
+- Add dsavell_update, cleans old kernels on boot, installs epel-release https://fedoraproject.org/wiki/EPEL, updates OS.
 - Changed ntp to dsavell_ntp
 
 #### Bugfixes

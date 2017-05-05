@@ -6,6 +6,5 @@ chmod +x /etc/rc.d/rc.local
 echo "package-cleanup --oldkernels --count=1 -y" >> /etc/rc.local
 yum install epel-release -y
 yum update -y
-updatedb
 )
 chvt 1
