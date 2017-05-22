@@ -4,6 +4,7 @@
 #### Features
 - Added dsavell_clamav_rhel_centos_7. https://www.clamav.net/
 - Added dsavell_fail2ban_rhel_centos_7. https://www.fail2ban.org/wiki/index.php/Main_Page
+- Added dsavell_rkhunter_rhel_centos_7. http://rkhunter.sourceforge.net/
 
 #### Bugfixes
 N/A
