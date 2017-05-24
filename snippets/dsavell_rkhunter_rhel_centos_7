@@ -1,0 +1,10 @@
+exec < /dev/tty3 > /dev/tty3
+chvt 3
+(
+yum --enablerepo=epel -y install rkhunter 
+rkhunter --update
+rkhunter --propupd 
+rkhunter --check --sk 
+echo "0 3 * * * /usr/bin/rkhunter --update ; /usr/bin/rkhunter --propupd ; /usr/bin/rkhunter --check --sk" >> /etc/crontab
+)
+chvt 1

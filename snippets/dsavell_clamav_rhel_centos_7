@@ -1,0 +1,19 @@
+exec < /dev/tty3 > /dev/tty3
+chvt 3
+(
+yum install clamav-server clamav-data clamav-update clamav-filesystem clamav clamav-scanner-systemd clamav-devel clamav-lib clamav-server-systemd -y
+
+sed -i -e 's/Example/#Example/g' /etc/freshclam.conf
+sed -i -e 's/Example/#Example/g' /etc/clamd.d/scan.conf
+sed -i -e 's/#LocalSocket/LocalSocket/g' /etc/clamd.d/scan.conf
+sed -i '/FRESHCLAM_DELAY/d' /etc/sysconfig/freshclam
+
+freshclam
+
+echo "0 3 * * * /bin/freshclam ; /bin/clamscan --recursive -i --exclude-dir=/sys/ > /var/log/clamav.log" >> /etc/crontab
+
+systemctl enable clamd@scan
+systemctl start clamd@scan
+)
+chvt 1
+
