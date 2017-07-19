@@ -1,0 +1,8 @@
+exec < /dev/tty3 > /dev/tty3
+chvt 3
+(
+rpm -Uvh https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm
+yum install puppet-agent -y
+/opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true
+)
+chvt 1

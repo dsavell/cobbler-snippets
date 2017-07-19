@@ -1,7 +1,7 @@
-yum install fail2ban -y
 exec < /dev/tty3 > /dev/tty3
 chvt 3
 (
+yum install fail2ban -y
 cat >> /etc/fail2ban/jail.local <<EOF_jaillocal
 [DEFAULT]
 # "ignoreip" can be an IP address, a CIDR mask or a DNS host. Fail2ban will not
